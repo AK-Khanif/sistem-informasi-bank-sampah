@@ -1,6 +1,14 @@
 <?php
 
+use App\Livewire\Customers\CustomerCreate;
+use App\Livewire\Customers\CustomerEdit;
+use App\Livewire\Customers\CustomerIndex;
+use App\Livewire\Customers\CustomerShow;
 use App\Livewire\Settings\SettingsPage;
+use App\Livewire\WasteCategories\WasteCategoryCreate;
+use App\Livewire\WasteCategories\WasteCategoryEdit;
+use App\Livewire\WasteCategories\WasteCategoryIndex;
+use App\Livewire\WasteCategories\WasteCategoryShow;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
@@ -16,5 +24,37 @@ Route::view('profile', 'profile')
 Route::get('settings', SettingsPage::class)
     ->middleware(['auth', 'verified'])
     ->name('settings.index');
+
+Route::get('customers', CustomerIndex::class)
+    ->middleware(['auth', 'verified'])
+    ->name('customers.index');
+
+Route::get('customers/create', CustomerCreate::class)
+    ->middleware(['auth', 'verified'])
+    ->name('customers.create');
+
+Route::get('customers/{customer}', CustomerShow::class)
+    ->middleware(['auth', 'verified'])
+    ->name('customers.show');
+
+Route::get('customers/{customer}/edit', CustomerEdit::class)
+    ->middleware(['auth', 'verified'])
+    ->name('customers.edit');
+
+Route::get('waste-categories', WasteCategoryIndex::class)
+    ->middleware(['auth', 'verified'])
+    ->name('waste-categories.index');
+
+Route::get('waste-categories/create', WasteCategoryCreate::class)
+    ->middleware(['auth', 'verified'])
+    ->name('waste-categories.create');
+
+Route::get('waste-categories/{waste_category}', WasteCategoryShow::class)
+    ->middleware(['auth', 'verified'])
+    ->name('waste-categories.show');
+
+Route::get('waste-categories/{waste_category}/edit', WasteCategoryEdit::class)
+    ->middleware(['auth', 'verified'])
+    ->name('waste-categories.edit');
 
 require __DIR__.'/auth.php';

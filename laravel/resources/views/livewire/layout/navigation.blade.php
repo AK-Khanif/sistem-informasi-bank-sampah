@@ -34,6 +34,14 @@ new class extends Component
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('customers.index')" :active="request()->routeIs('customers.*')" wire:navigate>
+                        {{ __('Nasabah') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('waste-categories.index')" :active="request()->routeIs('waste-categories.*')" wire:navigate>
+                        {{ __('Kategori Sampah') }}
+                    </x-nav-link>
+
                     <x-nav-link :href="route('settings.index')" :active="request()->routeIs('settings.index')" wire:navigate>
                         {{ __('Pengaturan') }}
                     </x-nav-link>
@@ -87,6 +95,14 @@ new class extends Component
         <div class="pt-2 pb-3 space-y-1">
                     <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
+                    </x-responsive-nav-link>
+
+                    <x-responsive-nav-link :href="route('customers.index')" :active="request()->routeIs('customers.*')" wire:navigate>
+                        {{ __('Nasabah') }}
+                    </x-responsive-nav-link>
+
+                    <x-responsive-nav-link :href="route('waste-categories.index')" :active="request()->routeIs('waste-categories.*')" wire:navigate>
+                        {{ __('Kategori Sampah') }}
                     </x-responsive-nav-link>
 
                     <x-responsive-nav-link :href="route('settings.index')" :active="request()->routeIs('settings.index')" wire:navigate>
