@@ -2,121 +2,134 @@
 
 # Development Backlog
 
-Dokumen ini merupakan daftar pekerjaan resmi (backlog) untuk pengembangan Sistem Informasi Bank Sampah (SIBS).
+Dokumen ini merupakan backlog resmi pengembangan **Sistem Informasi Bank Sampah (SIBS)**.
 
-Seluruh implementasi harus mengacu pada task yang terdapat di dokumen ini.
+Seluruh implementasi wajib mengikuti urutan task pada dokumen ini.
 
 ---
 
-# Status Task
+# Status
 
-| Status | Keterangan        |
+| Status | Arti              |
 | ------ | ----------------- |
-| ⬜      | Belum Dikerjakan  |
-| 🟨     | Sedang Dikerjakan |
+| ⬜      | Belum dikerjakan  |
+| 🟨     | Sedang dikerjakan |
 | ✅      | Selesai           |
-| ⏸️     | Ditunda           |
+| ⏸      | Ditunda           |
 
 ---
 
-# EPIC-001 Project Foundation
+# Prioritas
 
-| ID       | Task                                | Status |
-| -------- | ----------------------------------- | ------ |
-| TASK-001 | Inisialisasi Repository             | ✅      |
-| TASK-002 | Dokumentasi Proyek                  | ✅      |
-| TASK-003 | AI Workspace                        | 🟨     |
-| TASK-004 | Setup Laravel                       | ⬜      |
-| TASK-005 | Konfigurasi Development Environment | ⬜      |
+| Prioritas | Keterangan                       |
+| --------- | -------------------------------- |
+| High      | Harus selesai sebelum modul lain |
+| Medium    | Modul utama                      |
+| Low       | Dapat dikerjakan belakangan      |
+
+---
+
+# EPIC-001 Foundation
+
+| ID       | Task                      | Priority | Status |
+| -------- | ------------------------- | -------- | ------ |
+| TASK-101 | Inisialisasi Repository   | High     | ✅      |
+| TASK-102 | Dokumentasi Proyek        | High     | ✅      |
+| TASK-103 | AI Workspace              | High     | ✅      |
+| TASK-104 | Setup Laravel 13          | High     | ✅      |
+| TASK-105 | Development Environment   | High     | ✅      |
+| TASK-106 | Laravel Breeze + Livewire | High     | ✅      |
+| TASK-107 | Spatie Permission         | High     | ✅      |
+| TASK-108 | Activity Log Package      | High     | ✅      |
 
 ---
 
 # EPIC-002 Authentication
 
-| ID       | Task              | Status |
-| -------- | ----------------- | ------ |
-| TASK-101 | Login             | ⬜      |
-| TASK-102 | Logout            | ⬜      |
-| TASK-103 | Profil Pengguna   | ⬜      |
-| TASK-104 | Ganti Password    | ⬜      |
-| TASK-105 | Role & Permission | ⬜      |
+| ID       | Task                     | Priority | Depends On | Status |
+| -------- | ------------------------ | -------- | ---------- | ------ |
+| TASK-201 | Login                    | High     | TASK-108   | ⬜      |
+| TASK-202 | Logout                   | Medium   | TASK-201   | ⬜      |
+| TASK-203 | Profil Pengguna          | Medium   | TASK-201   | ⬜      |
+| TASK-204 | Ganti Password           | Medium   | TASK-201   | ⬜      |
+| TASK-205 | Role & Permission Seeder | High     | TASK-107   | ⬜      |
+| TASK-206 | Policy & Authorization   | High     | TASK-205   | ⬜      |
 
 ---
 
-# EPIC-003 Dashboard
+# EPIC-003 Master Data
 
-| ID       | Task                  | Status |
-| -------- | --------------------- | ------ |
-| TASK-201 | Dashboard Utama       | ⬜      |
-| TASK-202 | Statistik Bank Sampah | ⬜      |
-| TASK-203 | Grafik Bulanan        | ⬜      |
-
----
-
-# EPIC-004 Master Data
-
-| ID       | Task              | Status |
-| -------- | ----------------- | ------ |
-| TASK-301 | CRUD Nasabah      | ⬜      |
-| TASK-302 | CRUD Petugas      | ⬜      |
-| TASK-303 | CRUD Jenis Sampah | ⬜      |
-| TASK-304 | CRUD Harga Sampah | ⬜      |
-| TASK-305 | CRUD Pengepul     | ⬜      |
+| ID       | Task                 | Priority | Depends On | Status |
+| -------- | -------------------- | -------- | ---------- | ------ |
+| TASK-301 | CRUD Nasabah         | High     | TASK-205   | ⬜      |
+| TASK-302 | CRUD Users           | High     | TASK-205   | ⬜      |
+| TASK-303 | CRUD Kategori Sampah | High     | TASK-205   | ⬜      |
+| TASK-304 | CRUD Jenis Sampah    | High     | TASK-303   | ⬜      |
+| TASK-305 | CRUD Harga Sampah    | High     | TASK-304   | ⬜      |
+| TASK-306 | CRUD Pengepul        | Medium   | TASK-205   | ⬜      |
 
 ---
 
-# EPIC-005 Operasional
+# EPIC-004 Operasional
 
-| ID       | Task                   | Status |
-| -------- | ---------------------- | ------ |
-| TASK-401 | Transaksi Setor Sampah | ⬜      |
-| TASK-402 | Detail Transaksi       | ⬜      |
-| TASK-403 | Penjualan Sampah       | ⬜      |
-| TASK-404 | Detail Penjualan       | ⬜      |
-| TASK-405 | Kas Masuk              | ⬜      |
-| TASK-406 | Kas Keluar             | ⬜      |
+| ID       | Task                       | Priority | Depends On                 | Status |
+| -------- | -------------------------- | -------- | -------------------------- | ------ |
+| TASK-401 | Transaksi Setor Sampah     | High     | TASK-301,TASK-304,TASK-305 | ⬜      |
+| TASK-402 | Transaksi Penjualan Sampah | High     | TASK-304,TASK-305,TASK-306 | ⬜      |
+| TASK-403 | Transaksi Kas              | High     | TASK-401,TASK-402          | ⬜      |
+
+---
+
+# EPIC-005 Dashboard
+
+| ID       | Task                  | Priority | Depends On                 | Status |
+| -------- | --------------------- | -------- | -------------------------- | ------ |
+| TASK-501 | Dashboard Utama       | Medium   | TASK-401,TASK-402,TASK-403 | ⬜      |
+| TASK-502 | Statistik Bank Sampah | Medium   | TASK-501                   | ⬜      |
+| TASK-503 | Grafik Bulanan        | Low      | TASK-501                   | ⬜      |
 
 ---
 
 # EPIC-006 Laporan
 
-| ID       | Task              | Status |
-| -------- | ----------------- | ------ |
-| TASK-501 | Laporan Transaksi | ⬜      |
-| TASK-502 | Laporan Penjualan | ⬜      |
-| TASK-503 | Laporan Kas       | ⬜      |
-| TASK-504 | Export PDF        | ⬜      |
-| TASK-505 | Export Excel      | ⬜      |
+| ID       | Task              | Priority | Depends On                 | Status |
+| -------- | ----------------- | -------- | -------------------------- | ------ |
+| TASK-601 | Laporan Setoran   | Medium   | TASK-401                   | ⬜      |
+| TASK-602 | Laporan Penjualan | Medium   | TASK-402                   | ⬜      |
+| TASK-603 | Laporan Kas       | Medium   | TASK-403                   | ⬜      |
+| TASK-604 | Export PDF        | Low      | TASK-601,TASK-602,TASK-603 | ⬜      |
+| TASK-605 | Export Excel      | Low      | TASK-601,TASK-602,TASK-603 | ⬜      |
 
 ---
 
 # EPIC-007 Pengaturan
 
-| ID       | Task               | Status |
-| -------- | ------------------ | ------ |
-| TASK-601 | Profil Bank Sampah | ⬜      |
-| TASK-602 | Pengaturan Sistem  | ⬜      |
-| TASK-603 | Activity Log       | ⬜      |
+| ID       | Task                      | Priority | Depends On | Status |
+| -------- | ------------------------- | -------- | ---------- | ------ |
+| TASK-701 | Settings Module           | High     | TASK-108   | ⬜      |
+| TASK-702 | Profil Bank Sampah        | Medium   | TASK-701   | ⬜      |
+| TASK-703 | Pengaturan Sistem         | Medium   | TASK-701   | ⬜      |
+| TASK-704 | Implementasi Activity Log | Medium   | TASK-108   | ⬜      |
 
 ---
 
 # Release 1.0
 
-Task yang harus selesai sebelum sistem digunakan:
+Release dianggap selesai apabila seluruh task berikut telah selesai:
 
-* EPIC-001
-* EPIC-002
-* EPIC-003
-* EPIC-004
-* EPIC-005
-* EPIC-006
-* EPIC-007
+* EPIC-001 Foundation
+* EPIC-002 Authentication
+* EPIC-003 Master Data
+* EPIC-004 Operasional
+* EPIC-005 Dashboard
+* EPIC-006 Laporan
+* EPIC-007 Pengaturan
 
 ---
 
 # Release 1.1
 
-Fitur yang belum dikerjakan:
+Pengembangan lanjutan:
 
 * Chart of Accounts (COA)
 * Jurnal Umum
@@ -128,15 +141,17 @@ Fitur yang belum dikerjakan:
 
 ---
 
-# Cara Kerja
+# Workflow Pengembangan
 
-Setiap implementasi harus mengikuti urutan berikut:
+Setiap task wajib mengikuti alur berikut:
 
-1. Pilih satu task.
-2. Implementasikan task tersebut.
-3. Lakukan pengujian.
-4. Review hasil implementasi.
-5. Ubah status task menjadi selesai.
-6. Commit perubahan.
+1. Review Requirement.
+2. Membuat Implementation Plan.
+3. Review Implementation Plan.
+4. Implementasi.
+5. Feature Test & Unit Test.
+6. Code Review.
+7. Ubah status task.
+8. Commit ke Git.
 
-Satu task hanya boleh mengerjakan satu tujuan agar mudah ditinjau dan dipelihara.
+Satu task hanya boleh mengerjakan satu tujuan agar implementasi mudah direview dan dipelihara.
