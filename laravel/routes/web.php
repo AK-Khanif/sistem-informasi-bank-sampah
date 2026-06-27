@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Settings\SettingsPage;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
@@ -11,5 +12,9 @@ Route::view('dashboard', 'dashboard')
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
+
+Route::get('settings', SettingsPage::class)
+    ->middleware(['auth', 'verified'])
+    ->name('settings.index');
 
 require __DIR__.'/auth.php';

@@ -129,3 +129,66 @@ Seluruh Primary Key menggunakan UUID.
 Seluruh master data menggunakan Soft Delete.
 
 Seluruh tabel menggunakan timestamp bawaan Laravel.
+
+
+---
+
+
+# 7. Tabel settings
+
+Digunakan untuk menyimpan konfigurasi global aplikasi.
+
+## Tujuan
+
+Tabel ini menyimpan identitas dan konfigurasi Bank Sampah sehingga aplikasi dapat digunakan kembali oleh RW atau wilayah lain tanpa mengubah kode.
+
+---
+
+## Struktur Tabel
+
+| Kolom       | Tipe         | Null  | Keterangan               |
+| ----------- | ------------ | ----- | ------------------------ |
+| id          | UUID         | Tidak | Primary Key              |
+| app_name    | varchar(150) | Tidak | Nama aplikasi            |
+| bank_name   | varchar(150) | Tidak | Nama Bank Sampah         |
+| rw          | varchar(10)  | Ya    | Nomor RW                 |
+| village     | varchar(100) | Ya    | Kelurahan                |
+| district    | varchar(100) | Ya    | Kecamatan                |
+| city        | varchar(100) | Ya    | Kota                     |
+| province    | varchar(100) | Ya    | Provinsi                 |
+| address     | text         | Ya    | Alamat lengkap           |
+| phone       | varchar(20)  | Ya    | Nomor telepon            |
+| email       | varchar(150) | Ya    | Email resmi              |
+| logo        | varchar(255) | Ya    | Lokasi file logo         |
+| description | text         | Ya    | Deskripsi singkat        |
+| is_active   | boolean      | Tidak | Status konfigurasi aktif |
+| created_at  | timestamp    | Tidak | Waktu dibuat             |
+| updated_at  | timestamp    | Tidak | Waktu diperbarui         |
+
+---
+
+## Constraint
+
+* Primary Key menggunakan UUID.
+* Hanya boleh terdapat **satu konfigurasi aktif** (`is_active = true`).
+
+---
+
+## Index
+
+* is_active
+
+---
+
+## Business Rules
+
+* Sistem membaca konfigurasi dari record yang aktif.
+* Konfigurasi dapat diperbarui tanpa mengubah kode aplikasi.
+* Tidak menggunakan Soft Delete.
+* Tidak memiliki foreign key ke tabel lain.
+
+---
+
+## Catatan Implementasi
+
+Pada Release 1.0, tabel ini diperlakukan sebagai **singleton configuration** (satu konfigurasi aplikasi). Jika di masa depan sistem mendukung multi-RW atau multi-cabang, struktur ini masih dapat dikembangkan tanpa mengubah modul transaksi.

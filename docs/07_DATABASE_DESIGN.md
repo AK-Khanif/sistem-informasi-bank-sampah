@@ -399,41 +399,74 @@ Backup disimpan pada media yang berbeda dari server aplikasi.
 
 ---
 
-# 17. Release 1.0
+# Perubahan pada `docs/07_DATABASE_DESIGN.md`
 
-Tabel yang akan dibangun:
+## 17. Daftar Tabel Release 1.0
 
-1. users
-2. customers
-3. waste_categories
-4. waste_types
-5. waste_prices
-6. collectors
-7. deposits
-8. deposit_items
-9. sales
-10. sale_items
-11. cash_transactions
+### System
 
-Tabel roles dan permissions akan disediakan oleh package Spatie Permission.
+| Tabel                 | Keterangan                            |
+| --------------------- | ------------------------------------- |
+| users                 | Akun pengguna sistem                  |
+| roles                 | Hak akses (Spatie Permission)         |
+| permissions           | Daftar permission (Spatie Permission) |
+| model_has_roles       | Relasi role pengguna                  |
+| model_has_permissions | Relasi permission pengguna            |
+| role_has_permissions  | Relasi role dan permission            |
 
 ---
 
-# 18. Ruang Lingkup
+### Master Data
 
-Dokumen ini hanya mencakup Release 1.0.
+| Tabel            | Keterangan        |
+| ---------------- | ----------------- |
+| customers        | Data nasabah      |
+| collectors       | Data pengepul     |
+| waste_categories | Kategori sampah   |
+| waste_types      | Jenis sampah      |
+| waste_prices     | Harga beli sampah |
 
-Fitur berikut belum termasuk:
+---
 
-* Chart of Accounts (COA)
-* General Journal
-* Ledger
-* Trial Balance
-* Income Statement
-* Cash Flow Statement
-* Balance Sheet
+### System Configuration
 
-Seluruh modul akuntansi akan dirancang pada Release 1.1.
+| Tabel    | Keterangan                                                          |
+| -------- | ------------------------------------------------------------------- |
+| settings | Konfigurasi aplikasi (nama bank sampah, alamat, logo, kontak, dll.) |
+
+---
+
+### Transaction
+
+| Tabel             | Keterangan                         |
+| ----------------- | ---------------------------------- |
+| deposits          | Header transaksi setor             |
+| deposit_items     | Detail transaksi setor             |
+| sales             | Header transaksi penjualan         |
+| sale_items        | Detail transaksi penjualan         |
+| cash_transactions | Transaksi kas masuk dan kas keluar |
+
+---
+
+
+## 18. Urutan Migration
+
+1. users
+2. roles (Spatie)
+3. permissions (Spatie)
+4. settings
+5. customers
+6. collectors
+7. waste_categories
+8. waste_types
+9. waste_prices
+10. deposits
+11. deposit_items
+12. sales
+13. sale_items
+14. cash_transactions
+
+Tabel `settings` ditempatkan sebelum master data karena tidak memiliki foreign key dan menjadi konfigurasi global sistem.
 
 ---
 
