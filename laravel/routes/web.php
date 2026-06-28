@@ -9,6 +9,10 @@ use App\Livewire\WasteCategories\WasteCategoryCreate;
 use App\Livewire\WasteCategories\WasteCategoryEdit;
 use App\Livewire\WasteCategories\WasteCategoryIndex;
 use App\Livewire\WasteCategories\WasteCategoryShow;
+use App\Livewire\WasteTypes\WasteTypeCreate;
+use App\Livewire\WasteTypes\WasteTypeEdit;
+use App\Livewire\WasteTypes\WasteTypeIndex;
+use App\Livewire\WasteTypes\WasteTypeShow;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
@@ -56,5 +60,21 @@ Route::get('waste-categories/{waste_category}', WasteCategoryShow::class)
 Route::get('waste-categories/{waste_category}/edit', WasteCategoryEdit::class)
     ->middleware(['auth', 'verified'])
     ->name('waste-categories.edit');
+
+Route::get('waste-types', WasteTypeIndex::class)
+    ->middleware(['auth', 'verified'])
+    ->name('waste-types.index');
+
+Route::get('waste-types/create', WasteTypeCreate::class)
+    ->middleware(['auth', 'verified'])
+    ->name('waste-types.create');
+
+Route::get('waste-types/{waste_type}', WasteTypeShow::class)
+    ->middleware(['auth', 'verified'])
+    ->name('waste-types.show');
+
+Route::get('waste-types/{waste_type}/edit', WasteTypeEdit::class)
+    ->middleware(['auth', 'verified'])
+    ->name('waste-types.edit');
 
 require __DIR__.'/auth.php';

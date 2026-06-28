@@ -18,6 +18,7 @@ class WasteCategoryShow extends Component
         $this->authorize('view', $wasteCategory);
 
         $this->wasteCategory = $wasteCategory;
+        $this->wasteTypesCount = $wasteCategory->wasteTypes()->count();
     }
 
     public function render()

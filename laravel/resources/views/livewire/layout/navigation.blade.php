@@ -42,6 +42,10 @@ new class extends Component
                         {{ __('Kategori Sampah') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('waste-types.index')" :active="request()->routeIs('waste-types.*')" wire:navigate>
+                        {{ __('Jenis Sampah') }}
+                    </x-nav-link>
+
                     <x-nav-link :href="route('settings.index')" :active="request()->routeIs('settings.index')" wire:navigate>
                         {{ __('Pengaturan') }}
                     </x-nav-link>
@@ -103,6 +107,10 @@ new class extends Component
 
                     <x-responsive-nav-link :href="route('waste-categories.index')" :active="request()->routeIs('waste-categories.*')" wire:navigate>
                         {{ __('Kategori Sampah') }}
+                    </x-responsive-nav-link>
+
+                    <x-responsive-nav-link :href="route('waste-types.index')" :active="request()->routeIs('waste-types.*')" wire:navigate>
+                        {{ __('Jenis Sampah') }}
                     </x-responsive-nav-link>
 
                     <x-responsive-nav-link :href="route('settings.index')" :active="request()->routeIs('settings.index')" wire:navigate>

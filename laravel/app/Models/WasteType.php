@@ -2,21 +2,23 @@
 
 namespace App\Models;
 
-use Database\Factories\WasteCategoryFactory;
+use Database\Factories\WasteTypeFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class WasteCategory extends Model
+class WasteType extends Model
 {
-    /** @use HasFactory<WasteCategoryFactory> */
+    /** @use HasFactory<WasteTypeFactory> */
     use HasFactory, HasUuids, SoftDeletes;
 
     protected $fillable = [
+        'waste_category_id',
         'code',
         'name',
+        'unit',
         'description',
         'is_active',
     ];
@@ -28,8 +30,8 @@ class WasteCategory extends Model
         ];
     }
 
-    public function wasteTypes(): HasMany
+    public function wasteCategory(): BelongsTo
     {
-        return $this->hasMany(WasteType::class);
+        return $this->belongsTo(WasteCategory::class);
     }
 }
