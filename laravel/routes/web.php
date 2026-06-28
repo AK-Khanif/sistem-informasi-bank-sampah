@@ -13,6 +13,10 @@ use App\Livewire\WasteTypes\WasteTypeCreate;
 use App\Livewire\WasteTypes\WasteTypeEdit;
 use App\Livewire\WasteTypes\WasteTypeIndex;
 use App\Livewire\WasteTypes\WasteTypeShow;
+use App\Livewire\WastePrices\WastePriceCreate;
+use App\Livewire\WastePrices\WastePriceEdit;
+use App\Livewire\WastePrices\WastePriceIndex;
+use App\Livewire\WastePrices\WastePriceShow;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
@@ -76,5 +80,21 @@ Route::get('waste-types/{waste_type}', WasteTypeShow::class)
 Route::get('waste-types/{waste_type}/edit', WasteTypeEdit::class)
     ->middleware(['auth', 'verified'])
     ->name('waste-types.edit');
+
+Route::get('waste-prices', WastePriceIndex::class)
+    ->middleware(['auth', 'verified'])
+    ->name('waste-prices.index');
+
+Route::get('waste-prices/create', WastePriceCreate::class)
+    ->middleware(['auth', 'verified'])
+    ->name('waste-prices.create');
+
+Route::get('waste-prices/{waste_price}', WastePriceShow::class)
+    ->middleware(['auth', 'verified'])
+    ->name('waste-prices.show');
+
+Route::get('waste-prices/{waste_price}/edit', WastePriceEdit::class)
+    ->middleware(['auth', 'verified'])
+    ->name('waste-prices.edit');
 
 require __DIR__.'/auth.php';

@@ -2,42 +2,36 @@
 
 namespace App\Models;
 
-use Database\Factories\WasteTypeFactory;
+use Database\Factories\WastePriceFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class WasteType extends Model
+class WastePrice extends Model
 {
-    /** @use HasFactory<WasteTypeFactory> */
+    /** @use HasFactory<WastePriceFactory> */
     use HasFactory, HasUuids, SoftDeletes;
 
     protected $fillable = [
-        'waste_category_id',
-        'code',
-        'name',
-        'unit',
-        'description',
+        'waste_type_id',
+        'buy_price',
+        'effective_date',
         'is_active',
     ];
 
     protected function casts(): array
     {
         return [
+            'buy_price' => 'decimal:2',
+            'effective_date' => 'date',
             'is_active' => 'boolean',
         ];
     }
 
-    public function wasteCategory(): BelongsTo
+    public function wasteType(): BelongsTo
     {
-        return $this->belongsTo(WasteCategory::class);
-    }
-
-    public function wastePrices(): HasMany
-    {
-        return $this->hasMany(WastePrice::class);
+        return $this->belongsTo(WasteType::class)->withTrashed();
     }
 }

@@ -192,3 +192,99 @@ Tabel ini menyimpan identitas dan konfigurasi Bank Sampah sehingga aplikasi dapa
 ## Catatan Implementasi
 
 Pada Release 1.0, tabel ini diperlakukan sebagai **singleton configuration** (satu konfigurasi aplikasi). Jika di masa depan sistem mendukung multi-RW atau multi-cabang, struktur ini masih dapat dikembangkan tanpa mengubah modul transaksi.
+
+---
+
+# 8. Tabel waste_types
+
+Menyimpan data jenis sampah per kategori.
+
+Digunakan untuk mendefinisikan jenis sampah yang dikelola Bank Sampah.
+
+---
+
+## Struktur Tabel
+
+| Kolom              | Tipe         | Null  | Keterangan                   |
+| ------------------ | ------------ | ----- | ---------------------------- |
+| id                 | UUID         | Tidak | Primary Key                  |
+| waste_category_id  | UUID         | Tidak | Foreign Key ke waste_categories |
+| code               | varchar(10)  | Tidak | Kode jenis sampah (unik)     |
+| name               | varchar(100) | Tidak | Nama jenis sampah            |
+| unit               | varchar(20)  | Tidak | Satuan (kg, gram, pcs, dll.) |
+| description        | text         | Ya    | Deskripsi                    |
+| is_active          | boolean      | Tidak | Status aktif                 |
+| created_at         | timestamp    | Tidak | Waktu dibuat                 |
+| updated_at         | timestamp    | Tidak | Waktu diperbarui             |
+| deleted_at         | timestamp    | Ya    | Soft Delete                  |
+
+---
+
+## Constraint
+
+* `code` UNIQUE
+* `(waste_category_id, name)` UNIQUE
+
+---
+
+## Index
+
+* `waste_category_id`
+* `code`
+* `name`
+
+---
+
+## Foreign Key
+
+* `waste_category_id` → `waste_categories.id` ON DELETE CASCADE
+
+---
+
+# 9. Tabel waste_prices
+
+Menyimpan riwayat harga beli per jenis sampah.
+
+Harga bersifat historis — perubahan harga dilakukan dengan membuat record baru, bukan mengubah record lama.
+
+## Struktur Tabel
+
+| Kolom           | Tipe         | Null  | Keterangan                     |
+| --------------- | ------------ | ----- | ------------------------------ |
+| id              | UUID         | Tidak | Primary Key                    |
+| waste_type_id   | UUID         | Tidak | Foreign Key ke waste_types     |
+| buy_price       | decimal(12,2)| Tidak | Harga beli                     |
+| effective_date  | date         | Tidak | Tanggal mulai berlaku          |
+| is_active       | boolean      | Tidak | Status harga aktif             |
+| created_at      | timestamp    | Tidak | Waktu dibuat                   |
+| updated_at      | timestamp    | Tidak | Waktu diperbarui               |
+| deleted_at      | timestamp    | Ya    | Soft Delete                    |
+
+---
+
+## Constraint
+
+* Hanya boleh ada **satu harga aktif** (`is_active = true`) untuk setiap `waste_type_id` pada satu waktu. Logika ini di-handle di Service Layer.
+
+---
+
+## Index
+
+* `waste_type_id`
+* `is_active`
+* `effective_date`
+
+---
+
+## Foreign Key
+
+* `waste_type_id` → `waste_types.id` ON DELETE CASCADE
+
+---
+
+## Business Rules
+
+* Harga mempunyai tanggal mulai berlaku (`effective_date`).
+* Perubahan harga tidak mengubah transaksi yang telah terjadi.
+* Harga beli (`buy_price`) bersifat immutable — tidak dapat diubah setelah record dibuat.
+* Perubahan nominal harga harus dilakukan dengan membuat record baru.

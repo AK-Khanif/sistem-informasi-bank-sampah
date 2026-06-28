@@ -61,10 +61,10 @@ Seluruh implementasi wajib mengikuti urutan task pada dokumen ini.
 
 | ID       | Task                 | Priority | Depends On | Status |
 | -------- | -------------------- | -------- | ---------- | ------ |
-| TASK-301 | CRUD Nasabah         | High     | TASK-205   | ⬜      |
+| TASK-301 | CRUD Nasabah         | High     | TASK-205   | ✅      |
 | TASK-302 | CRUD Users           | High     | TASK-205   | ⬜      |
-| TASK-303 | CRUD Kategori Sampah | High     | TASK-205   | ⬜      |
-| TASK-304 | CRUD Jenis Sampah    | High     | TASK-303   | ⬜      |
+| TASK-303 | CRUD Kategori Sampah | High     | TASK-205   | ✅      |
+| TASK-304 | CRUD Jenis Sampah    | High     | TASK-303   | ✅      |
 | TASK-305 | CRUD Harga Sampah    | High     | TASK-304   | ⬜      |
 | TASK-306 | CRUD Pengepul        | Medium   | TASK-205   | ⬜      |
 

@@ -46,6 +46,10 @@ new class extends Component
                         {{ __('Jenis Sampah') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('waste-prices.index')" :active="request()->routeIs('waste-prices.*')" wire:navigate>
+                        {{ __('Harga Sampah') }}
+                    </x-nav-link>
+
                     <x-nav-link :href="route('settings.index')" :active="request()->routeIs('settings.index')" wire:navigate>
                         {{ __('Pengaturan') }}
                     </x-nav-link>
@@ -111,6 +115,10 @@ new class extends Component
 
                     <x-responsive-nav-link :href="route('waste-types.index')" :active="request()->routeIs('waste-types.*')" wire:navigate>
                         {{ __('Jenis Sampah') }}
+                    </x-responsive-nav-link>
+
+                    <x-responsive-nav-link :href="route('waste-prices.index')" :active="request()->routeIs('waste-prices.*')" wire:navigate>
+                        {{ __('Harga Sampah') }}
                     </x-responsive-nav-link>
 
                     <x-responsive-nav-link :href="route('settings.index')" :active="request()->routeIs('settings.index')" wire:navigate>
