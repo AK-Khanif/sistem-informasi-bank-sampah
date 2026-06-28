@@ -17,6 +17,10 @@ use App\Livewire\WastePrices\WastePriceCreate;
 use App\Livewire\WastePrices\WastePriceEdit;
 use App\Livewire\WastePrices\WastePriceIndex;
 use App\Livewire\WastePrices\WastePriceShow;
+use App\Livewire\Collectors\CollectorCreate;
+use App\Livewire\Collectors\CollectorEdit;
+use App\Livewire\Collectors\CollectorIndex;
+use App\Livewire\Collectors\CollectorShow;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
@@ -96,5 +100,21 @@ Route::get('waste-prices/{waste_price}', WastePriceShow::class)
 Route::get('waste-prices/{waste_price}/edit', WastePriceEdit::class)
     ->middleware(['auth', 'verified'])
     ->name('waste-prices.edit');
+
+Route::get('collectors', CollectorIndex::class)
+    ->middleware(['auth', 'verified'])
+    ->name('collectors.index');
+
+Route::get('collectors/create', CollectorCreate::class)
+    ->middleware(['auth', 'verified'])
+    ->name('collectors.create');
+
+Route::get('collectors/{collector}', CollectorShow::class)
+    ->middleware(['auth', 'verified'])
+    ->name('collectors.show');
+
+Route::get('collectors/{collector}/edit', CollectorEdit::class)
+    ->middleware(['auth', 'verified'])
+    ->name('collectors.edit');
 
 require __DIR__.'/auth.php';

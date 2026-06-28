@@ -16,17 +16,17 @@
                 @endif
 
                 <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-2xl font-semibold">Daftar Nasabah</h2>
-                    @can('create', App\Models\Customer::class)
-                        <a href="{{ route('customers.create') }}" wire:navigate
+                    <h2 class="text-2xl font-semibold">Daftar Pengepul</h2>
+                    @can('create', App\Models\Collector::class)
+                        <a href="{{ route('collectors.create') }}" wire:navigate
                            class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                            Tambah Nasabah
+                            Tambah Pengepul
                         </a>
                     @endcan
                 </div>
 
                 <div class="mb-4">
-                    <input type="text" wire:model.live.debounce.300ms="search" placeholder="Cari nama, kode, atau telepon..."
+                    <input type="text" wire:model.live.debounce.300ms="search" placeholder="Cari kode, nama, telepon, atau PIC..."
                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                 </div>
 
@@ -36,29 +36,21 @@
                             <tr>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kode</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jenis Kelamin</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Telepon</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">PIC</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            @forelse ($customers as $customer)
+                            @forelse ($collectors as $collector)
                                 <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $customer->customer_code }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $customer->full_name }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        @if ($customer->gender === 'L')
-                                            Laki-laki
-                                        @elseif ($customer->gender === 'P')
-                                            Perempuan
-                                        @else
-                                            -
-                                        @endif
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $customer->phone ?? '-' }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $collector->collector_code }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $collector->name }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $collector->phone ?? '-' }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $collector->contact_person ?? '-' }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm">
-                                        @if ($customer->is_active)
+                                        @if ($collector->is_active)
                                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Aktif</span>
                                         @else
                                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Tidak Aktif</span>
@@ -66,15 +58,15 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                         <div class="flex gap-2">
-                                            <a href="{{ route('customers.show', $customer) }}" wire:navigate
+                                            <a href="{{ route('collectors.show', $collector) }}" wire:navigate
                                                class="text-blue-600 hover:text-blue-900">Detail</a>
-                                            @can('update', $customer)
-                                                <a href="{{ route('customers.edit', $customer) }}" wire:navigate
+                                            @can('update', $collector)
+                                                <a href="{{ route('collectors.edit', $collector) }}" wire:navigate
                                                    class="text-yellow-600 hover:text-yellow-900">Edit</a>
                                             @endcan
-                                            @can('delete', $customer)
-                                                <button wire:click="delete('{{ $customer->id }}')"
-                                                        wire:confirm="Apakah Anda yakin ingin menghapus data nasabah ini?"
+                                            @can('delete', $collector)
+                                                <button wire:click="delete('{{ $collector->id }}')"
+                                                        wire:confirm="Apakah Anda yakin ingin menghapus data pengepul ini?"
                                                         class="text-red-600 hover:text-red-900">
                                                     Hapus
                                                 </button>
@@ -84,7 +76,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="6" class="px-6 py-4 text-center text-sm text-gray-500">Tidak ada data nasabah.</td>
+                                    <td colspan="6" class="px-6 py-4 text-center text-sm text-gray-500">Tidak ada data pengepul.</td>
                                 </tr>
                             @endforelse
                         </tbody>
@@ -92,7 +84,7 @@
                 </div>
 
                 <div class="mt-4">
-                    {{ $customers->links() }}
+                    {{ $collectors->links() }}
                 </div>
 
             </div>
